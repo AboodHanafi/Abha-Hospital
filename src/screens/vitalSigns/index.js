@@ -1,28 +1,33 @@
-import axios from "axios";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import BasicTable from "../../components/table";
-import { vitalSignsThunk } from "../../redux/features/auth/authActions";
+import { vitalSignsThunk } from "../../redux/features/patientData/patintActions";
+
+function createData(id, clinic, doctor, date, time, notes) {
+  return { id, clinic, doctor, date, time, notes };
+}
 
 const VitalSigns = () => {
   const dispatch = useDispatch();
-  const patientCode = localStorage.getItem("patientCode");
-  const vitalSignsData = async () => {
-    try {
-      const response = await axios.get(
-        "http://aiph.me:8000/api/patient/labReports?patientCode=0/372081&pageNo=1&offset=1&rows=7&lang=AR"
-      );
-      console.log(response);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const patient = useSelector((state) => state.vitalSigns.patientData);
+
+  const rows = patient.map((item) => {
+    const date = item.vitalSignDate.split(" ");
+    return createData(
+      item.vitalSignId,
+      item.clinic.clinicName,
+      item.doctor.doctorName,
+      date[0],
+      date[1],
+      item.notes
+    );
+  });
+
   useEffect(() => {
-    // vitalSignsData();
     dispatch(vitalSignsThunk());
   }, []);
 
-  return <BasicTable />;
+  return <BasicTable rows={rows} />;
 };
 
 export default VitalSigns;

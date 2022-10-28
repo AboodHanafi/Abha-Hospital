@@ -6,6 +6,8 @@ import {
 } from "@mui/material";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
+import SideBar from "./components/sideBar";
+import Layout from "./layout/layout";
 import HomePage from "./screens/home";
 import SignIn from "./screens/signin";
 import VitalSigns from "./screens/vitalSigns";
