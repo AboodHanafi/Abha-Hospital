@@ -6,7 +6,10 @@ import {
   Settings,
   StackedLineChart,
   Upload,
+  Menu,
 } from "@mui/icons-material";
+// import MenuIcon from "@mui/icons-material/Menu";
+
 import smallLogo from "./logo.png";
 import MainLogo from "./MainLogo.png";
 
@@ -24,6 +27,11 @@ export const listHome = [
 ];
 
 export const SideBarIcons = [
+  {
+    id: 0,
+    name: "Menu",
+    icon: <Menu />,
+  },
   {
     id: 1,
     name: "Search",

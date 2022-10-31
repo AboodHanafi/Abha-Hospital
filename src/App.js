@@ -18,14 +18,21 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Toaster />
-      <Container maxWidth="xl">
-        <CssBaseline />
-        <Routes>
-          <Route path={"/"} element={<HomePage />} />
-          <Route path={"/signin"} element={<SignIn />} />
-          <Route path={"/vital-signs"} element={<VitalSigns />} />
-        </Routes>
-      </Container>
+      <Layout>
+        <Container
+          sx={{
+            backgroundColor: "red",
+          }}
+          maxWidth="xl"
+        >
+          <CssBaseline />
+          <Routes>
+            <Route path={"/"} element={<HomePage />} />
+            <Route path={"/signin"} element={<SignIn />} />
+            <Route path={"/vital-signs"} element={<VitalSigns />} />
+          </Routes>
+        </Container>
+      </Layout>
     </ThemeProvider>
   );
 }
