@@ -1,44 +1,89 @@
-import { SideBarIcons } from "../../assets";
+import {
+  familySideBarSection,
+  firstSideBarSection,
+  myAppointmentSideBar,
+  offersSideBar,
+} from "../../assets";
 import MuiDrawer from "@mui/material/Drawer";
-import { Divider, IconButton, Stack } from "@mui/material";
+import { Collapse, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { useState } from "react";
 
-// const DrawerHeader = styled("div")(({ theme }) => ({
-//   display: "flex",
-//   alignItems: "center",
-//   justifyContent: "center",
-//   padding: theme.spacing(0, 1),
-//   ...theme.mixins.toolbar,
-// }));
+const ExpandableSideBarItem = ({ item }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Stack direction="row" justifyContent="space-between">
+        <Stack
+          justifyContent={"flex-start"}
+          alignItems={"center"}
+          direction={"row"}
+          key={item.id}
+          spacing={1}
+          padding={1}
+          sx={{ cursor: "pointer" }}
+          onClick={() => setOpen(!open)}
+        >
+          <img width={"20px"} src={item.icon} alt={item.name} />
+          <Typography fontWeight={600} fontSize={"13px"} color={"#F4F4F4"}>
+            {item.name}
+          </Typography>
+        </Stack>
+        {open ? (
+          <KeyboardArrowDownIcon sx={{ fill: "#FFF" }} />
+        ) : (
+          <KeyboardArrowUpIcon sx={{ fill: "#FFF" }} />
+        )}
+      </Stack>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        {item.children.map((item) => (
+          <Typography
+            paddingX={5}
+            paddingY={0.5}
+            fontWeight={300}
+            fontSize={"13px"}
+            color={"#F4F4F4"}
+            sx={{
+              cursor: "pointer",
+            }}
+          >
+            {item.name}
+          </Typography>
+        ))}
+      </Collapse>
+    </>
+  );
+};
+const SideBarItem = ({ menuItems, label }) => (
+  <Stack>
+    <Typography fontWeight={300} fontSize={"13px"} color={"#fff"}>
+      {label}
+    </Typography>
 
-// const closedMixin = (theme) => ({
-//   transition: theme.transitions.create("all", {
-//     easing: theme.transitions.easing.sharp,
-//     duration: theme.transitions.duration.leavingScreen,
-//   }),
-//   overflowX: "hidden",
-//   width: `calc(${theme.spacing(7)} + 1px)`,
-//   [theme.breakpoints.up("sm")]: {
-//     width: `calc(${theme.spacing(8)} + 1px)`,
-//   },
-//   [theme.breakpoints.down("sm")]: {
-//     width: 0,
-//     position: "fixed",
-//   },
-// });
-
-// const Drawer = styled(MuiDrawer, {
-//   shouldForwardProp: (prop) => prop !== "open",
-// })(({ theme }) => ({
-//   width: 20,
-//   flexShrink: 0,
-//   whiteSpace: "nowrap",
-//   boxSizing: "border-box",
-//   ...(true && {
-//     ...closedMixin(theme),
-//     "& .MuiDrawer-paper": closedMixin(theme),
-//   }),
-// }));
+    {menuItems.map((item) => {
+      return item.children ? (
+        <ExpandableSideBarItem item={item} />
+      ) : (
+        <Stack
+          justifyContent={"flex-start"}
+          alignItems={"center"}
+          direction={"row"}
+          key={item.id}
+          spacing={1}
+          padding={1}
+          sx={{ cursor: "pointer" }}
+        >
+          <img width={"20px"} src={item.icon} alt={item.name} />
+          <Typography fontWeight={600} fontSize={"13px"} color={"#F4F4F4"}>
+            {item.name}
+          </Typography>
+        </Stack>
+      );
+    })}
+  </Stack>
+);
 
 const SideBar = () => {
   const navigate = useNavigate();
@@ -47,21 +92,24 @@ const SideBar = () => {
       sx={{
         "& .MuiDrawer-paper": {
           backgroundColor: "#0E4C8F",
-          width: "250px",
-          padding: "120px 0",
+          width: "300px",
+          padding: "100px 20px 0",
         },
       }}
       variant="permanent"
       open={true}
     >
-      {SideBarIcons.map((item) => {
-        return (
-          <Stack key={item.id}>
-            <IconButton>{item.icon}</IconButton>
-            <Divider />
-          </Stack>
-        );
-      })}
+      <Stack spacing={3}>
+        <SideBarItem menuItems={firstSideBarSection} label={"Medical File"} />
+
+        <SideBarItem menuItems={familySideBarSection} label={"My family"} />
+        <SideBarItem
+          menuItems={myAppointmentSideBar}
+          label={"My Appointment"}
+        />
+
+        <SideBarItem menuItems={offersSideBar} label={"Offers"} />
+      </Stack>
     </MuiDrawer>
   );
 };

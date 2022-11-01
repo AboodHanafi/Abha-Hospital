@@ -10,6 +10,7 @@ import SideBar from "./components/sideBar";
 import Layout from "./layout/layout";
 import HomePage from "./screens/home";
 import SignIn from "./screens/signin";
+import TestComp from "./screens/test";
 import VitalSigns from "./screens/vitalSigns";
 
 function App() {
@@ -19,19 +20,13 @@ function App() {
     <ThemeProvider theme={theme}>
       <Toaster />
       <Layout>
-        <Container
-          sx={{
-            backgroundColor: "red",
-          }}
-          maxWidth="xl"
-        >
-          <CssBaseline />
-          <Routes>
-            <Route path={"/"} element={<HomePage />} />
-            <Route path={"/signin"} element={<SignIn />} />
-            <Route path={"/vital-signs"} element={<VitalSigns />} />
-          </Routes>
-        </Container>
+        <CssBaseline />
+        <Routes>
+          <Route path={"/"} element={<VitalSigns />} />
+          <Route path={"/signin"} element={<SignIn />} />
+          {/* <Route path={"/vital-signs"} element={<VitalSigns />} /> */}
+          <Route path={"/test"} element={<TestComp />} />
+        </Routes>
       </Layout>
     </ThemeProvider>
   );

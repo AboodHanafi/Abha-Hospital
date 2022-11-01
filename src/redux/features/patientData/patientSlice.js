@@ -15,7 +15,6 @@ export const vitalSignsSlice = createSlice({
     });
     builder.addCase(vitalSignsThunk.fulfilled, (state, action) => {
       state.patientData = action.payload;
-      console.log(state.patientData);
     });
     builder.addCase(vitalSignsThunk.rejected, (state, action) => {
       console.log("rejected");
