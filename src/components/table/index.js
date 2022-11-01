@@ -46,12 +46,12 @@ export default function BasicTable({ rows }) {
       width={"100%"}
       sx={{
         backgroundColor: "#f4f4f4",
+        boxShadow: "none",
       }}
       component={Paper}
     >
       <ScrollDialog vitalDetails={vitalDetails} open={open} setOpen={setOpen} />
       <StyledTable
-        // rowHeight={100}
         rows={getRows(rows)}
         component={Pagination}
         columns={[

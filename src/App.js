@@ -22,9 +22,9 @@ function App() {
       <Layout>
         <CssBaseline />
         <Routes>
-          <Route path={"/"} element={<VitalSigns />} />
+          <Route path={"/"} element={<HomePage />} />
           <Route path={"/signin"} element={<SignIn />} />
-          {/* <Route path={"/vital-signs"} element={<VitalSigns />} /> */}
+          <Route path={"/vital-signs"} element={<VitalSigns />} />
           <Route path={"/test"} element={<TestComp />} />
         </Routes>
       </Layout>

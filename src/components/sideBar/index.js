@@ -101,7 +101,6 @@ const SideBar = () => {
     >
       <Stack spacing={3}>
         <SideBarItem menuItems={firstSideBarSection} label={"Medical File"} />
-
         <SideBarItem menuItems={familySideBarSection} label={"My family"} />
         <SideBarItem
           menuItems={myAppointmentSideBar}

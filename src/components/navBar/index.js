@@ -13,18 +13,18 @@ const NavBar = () => {
       open={true}
     >
       <Stack direction="row" justifyContent="space-between">
-        <IconButton onClick={() => navigate("/")}>
+        <IconButton>
           <MenuIcon fontSize="large" />
         </IconButton>
         <Stack direction="row" spacing={2} alignItems="center">
-          <IconButton onClick={() => navigate("/")}>
+          <IconButton>
             <NotificationsNoneIcon fontSize="large" />
           </IconButton>
           <Stack direction="row" alignItems={"center"}>
             <Typography color={"#0A0A0A"} fontSize="18px" fontWeight={600}>
               Jehad
             </Typography>
-            <IconButton onClick={() => navigate("/")}>
+            <IconButton>
               <KeyboardArrowDownIcon fontSize="large" />
             </IconButton>
           </Stack>

@@ -17,7 +17,7 @@ const VitalSigns = () => {
       <Typography fontWeight={600} fontSize={"16px"} color={"#0A0A0A"}>
         Vital sign
       </Typography>
-      <BasicTable rows={patient} />;
+      <BasicTable rows={patient} />
     </Stack>
   );
 };
