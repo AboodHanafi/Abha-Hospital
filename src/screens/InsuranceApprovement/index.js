@@ -1,28 +1,33 @@
 import { IconButton, Stack, Typography } from "@mui/material";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ScrollDialog from "../../components/popUp";
 import BasicTable from "../../components/table";
 import { getPatientDataThunk } from "../../redux/features/patientData/patintActions";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
-const VitalSigns = () => {
+const InsuranceApprovment = () => {
   const dispatch = useDispatch();
   const patient = useSelector((state) => state.patientData.patientData);
-  const [open, setOpen] = useState(false);
-  const [vitalDetails, setvitalDetails] = useState([]);
-  const VitalCloumns = [
+  const testReportsColumns = [
     {
       field: "id",
       headerName: "#",
     },
     {
-      field: "doctor",
+      field: "reqId",
+      headerName: "Request Number",
       flex: 1,
       align: "center",
       headerAlign: "center",
-      renderCell: ({ value }) => value.doctorName,
+    },
+    {
+      field: "reqDate",
+      headerName: "Request Date",
+      flex: 1,
+      align: "center",
+      headerAlign: "center",
     },
     {
       field: "clinic",
@@ -32,47 +37,67 @@ const VitalSigns = () => {
       renderCell: ({ value }) => value.clinicName,
     },
     {
-      field: "notes",
+      field: "doctor",
       flex: 1,
       align: "center",
       headerAlign: "center",
+      renderCell: ({ value }) => value.doctorName,
     },
     {
-      field: "vitalSignDate",
-      headerName: "Vital Sign Date",
+      field: "reqStatus",
+      headerName: "Status",
       flex: 1,
       align: "center",
       headerAlign: "center",
+      renderCell: ({ row }) => (
+        <Typography
+          fontWeight={500}
+          fontSize={14}
+          sx={{
+            color: "#F4F4F4",
+            borderRadius: "10px",
+            background:
+              row.reqStatus === "لم يتخذ قرار بعد"
+                ? "#F59D18"
+                : row.reqStatus === "موافق عليه"
+                ? "#0CA437"
+                : "#BF1C1C",
+            textAlign: "center",
+            padding: "10px",
+          }}
+        >
+          {row.reqStatus}
+        </Typography>
+      ),
     },
     {
-      field: "show",
-      headerName: "show",
+      field: "View",
+      headerName: "View",
       flex: 1,
       align: "center",
       headerAlign: "center",
       renderCell: ({ row }) => (
         <IconButton
-          key={row.vitalSignId}
+          key={row.reqId}
           onClick={() => handleClick(row.vitalSignId)}
         >
-          <VisibilityIcon id={row.vitalSignId} />
+          <VisibilityIcon id={row.reqId} />
         </IconButton>
       ),
     },
   ];
+
   const handleClick = async (id) => {
     const { data } = await axios.get(
-      `http://aiph.me:8000/api/patient/PtVSDtl?vitalSignId=${id}&pageNo=1&offset=1&rows=5&lang=AR`
+      `http://aiph.me:8000/api/patient/srvApvlDtl?reqId=90008&pageNo=1&offset=1&rows=100&lang=AR`
     );
-
-    setOpen(true);
-    setvitalDetails(data.vitalSigns);
+    console.log(data);
   };
 
   useEffect(() => {
     dispatch(
       getPatientDataThunk({
-        url: "PtVS",
+        url: "srvApvl",
       })
     );
   }, []);
@@ -80,15 +105,14 @@ const VitalSigns = () => {
   return (
     <Stack alignItems={"start"} width={"100%"} spacing={4}>
       <Typography fontWeight={600} fontSize={"16px"} color={"#0A0A0A"}>
-        Vital sign
+        Insurance approvement
       </Typography>
-      <ScrollDialog vitalDetails={vitalDetails} open={open} setOpen={setOpen} />
       <BasicTable
-        columns={VitalCloumns}
-        rows={patient.vitalSigns ? patient.vitalSigns : []}
+        columns={testReportsColumns}
+        rows={patient.approvals ? patient.approvals : []}
       />
     </Stack>
   );
 };
 
-export default VitalSigns;
+export default InsuranceApprovment;

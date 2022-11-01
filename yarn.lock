@@ -3415,6 +3415,11 @@ commander@^8.3.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-8.3.0.tgz#4837ea1b2da67b9c616a67afbb0fafee567bca66"
   integrity sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==
 
+common-base64-downloader-react@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/common-base64-downloader-react/-/common-base64-downloader-react-1.0.7.tgz#906acf939ca66730c3310e3c422970be09ceaa93"
+  integrity sha512-5qIMAeZc508towfpOMKSWMnz6wdzFG3uscKp9JoyHT3lfsZezf8om4v5aYH8fwjiP+wwOLgQkf4/AlXGlZhvew==
+
 common-path-prefix@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/common-path-prefix/-/common-path-prefix-3.0.0.tgz#7d007a7e07c58c4b4d5f433131a19141b29f11e0"

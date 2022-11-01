@@ -36,14 +36,15 @@ export const firstSideBarSection = [
     id: 0,
     name: "Vital signs",
     icon: vital,
+    path: "vital-signs",
   },
   {
     id: 1,
     name: "Test report",
     icon: testReport,
     children: [
-      { id: 0, name: "Lab Reports" },
-      { id: 1, name: "Rad Reports" },
+      { id: 0, name: "Lab Reports", path: "lab-reports" },
+      { id: 1, name: "Rad Reports", path: "rad-reports" },
     ],
   },
   {
@@ -55,6 +56,7 @@ export const firstSideBarSection = [
     id: 3,
     name: "Insurance approvement",
     icon: InsuranceApprovement,
+    path: "Insurance-approvment",
   },
 
   {

@@ -5,6 +5,6 @@ import vitalSignsSlice from "./features/patientData/patientSlice";
 export const store = configureStore({
   reducer: {
     auth: authSlice,
-    vitalSigns: vitalSignsSlice,
+    patientData: vitalSignsSlice,
   },
 });

@@ -2,7 +2,7 @@ import { Button, Link, Stack, Typography } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { listHome, logo } from "../../assets";
+import { logo } from "../../assets";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ const HomePage = () => {
       <Stack spacing={2}>
         <img src={logo.MainLogo} alt="logo" />
       </Stack>
-      <Stack>
+      {/* <Stack>
         <Typography fontSize={"32px"} fontWeight={400}>
           ملفي الطبي :
         </Typography>
@@ -65,7 +65,7 @@ const HomePage = () => {
             </Link>
           );
         })}
-      </Stack>
+      </Stack> */}
     </Stack>
   );
 };

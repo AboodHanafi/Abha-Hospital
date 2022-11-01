@@ -3,16 +3,10 @@ import TableContainer from "@mui/material/TableContainer";
 
 import Paper from "@mui/material/Paper";
 import { DataGrid } from "@mui/x-data-grid";
-import { IconButton, Pagination, Stack, styled } from "@mui/material";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+import { Pagination, Stack, styled } from "@mui/material";
 import { getRows } from "./getRows";
-import axios from "axios";
-import ScrollDialog from "../popUp";
-import { useState } from "react";
 
-export default function BasicTable({ rows }) {
-  const [open, setOpen] = useState(false);
-  const [vitalDetails, setvitalDetails] = useState([]);
+export default function BasicTable({ rows, columns }) {
   const StyledTable = styled(DataGrid)(({ theme }) => ({
     border: "none",
     minHeight: "80vh",
@@ -32,15 +26,6 @@ export default function BasicTable({ rows }) {
       backgroundColor: "#fff",
     },
   }));
-  const handleClick = async (id) => {
-    const { data } = await axios.get(
-      `http://aiph.me:8000/api/patient/PtVSDtl?vitalSignId=${id}&pageNo=1&offset=1&rows=5&lang=AR`
-    );
-
-    setOpen(true);
-    setvitalDetails(data.vitalSigns);
-  };
-
   return (
     <Stack
       width={"100%"}
@@ -50,58 +35,10 @@ export default function BasicTable({ rows }) {
       }}
       component={Paper}
     >
-      <ScrollDialog vitalDetails={vitalDetails} open={open} setOpen={setOpen} />
       <StyledTable
         rows={getRows(rows)}
         component={Pagination}
-        columns={[
-          {
-            field: "id",
-            headerName: "#",
-          },
-          {
-            field: "doctor",
-            flex: 1,
-            align: "center",
-            headerAlign: "center",
-            renderCell: ({ value }) => value.doctorName,
-          },
-          {
-            field: "clinic",
-            flex: 1,
-            align: "center",
-            headerAlign: "center",
-            renderCell: ({ value }) => value.clinicName,
-          },
-          {
-            field: "notes",
-            flex: 1,
-            align: "center",
-            headerAlign: "center",
-          },
-          {
-            field: "vitalSignDate",
-            headerName: "Vital Sign Date",
-            flex: 1,
-            align: "center",
-            headerAlign: "center",
-          },
-          {
-            field: "show",
-            headerName: "show",
-            flex: 1,
-            align: "center",
-            headerAlign: "center",
-            renderCell: ({ row }) => (
-              <IconButton
-                key={row.vitalSignId}
-                onClick={() => handleClick(row.vitalSignId)}
-              >
-                <VisibilityIcon id={row.vitalSignId} />
-              </IconButton>
-            ),
-          },
-        ]}
+        columns={columns}
         pageSize={5}
         rowsPerPageOptions={[20]}
         disableSelectionOnClick

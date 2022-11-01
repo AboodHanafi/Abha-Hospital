@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { vitalSignsThunk } from "./patintActions";
+import { getPatientDataThunk } from "./patintActions";
 
 const initialState = {
-  patientData: [],
+  patientData: {},
 };
 
 export const vitalSignsSlice = createSlice({
@@ -10,15 +10,11 @@ export const vitalSignsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(vitalSignsThunk.pending, (state) => {
-      console.log("pending");
-    });
-    builder.addCase(vitalSignsThunk.fulfilled, (state, action) => {
+    builder.addCase(getPatientDataThunk.pending, (state) => {});
+    builder.addCase(getPatientDataThunk.fulfilled, (state, action) => {
       state.patientData = action.payload;
     });
-    builder.addCase(vitalSignsThunk.rejected, (state, action) => {
-      console.log("rejected");
-    });
+    builder.addCase(getPatientDataThunk.rejected, (state, action) => {});
   },
 });
 

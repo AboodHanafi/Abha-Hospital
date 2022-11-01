@@ -48,10 +48,6 @@ const SignIn = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // console.log({
-    //   mobile: data.get("mobile"),
-    //   password: data.get("password"),
-    // });
     try {
       const res = await dispatch(
         signInThunk({

@@ -6,12 +6,12 @@ import {
 } from "../../assets";
 import MuiDrawer from "@mui/material/Drawer";
 import { Collapse, Stack, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useState } from "react";
 
-const ExpandableSideBarItem = ({ item }) => {
+const ExpandableSideBarItem = ({ item, navigate }) => {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -43,11 +43,13 @@ const ExpandableSideBarItem = ({ item }) => {
             paddingX={5}
             paddingY={0.5}
             fontWeight={300}
+            key={item.id}
             fontSize={"13px"}
             color={"#F4F4F4"}
             sx={{
               cursor: "pointer",
             }}
+            onClick={() => navigate(item.path)}
           >
             {item.name}
           </Typography>
@@ -56,7 +58,7 @@ const ExpandableSideBarItem = ({ item }) => {
     </>
   );
 };
-const SideBarItem = ({ menuItems, label }) => (
+const SideBarItem = ({ menuItems, label, navigate }) => (
   <Stack>
     <Typography fontWeight={300} fontSize={"13px"} color={"#fff"}>
       {label}
@@ -64,7 +66,7 @@ const SideBarItem = ({ menuItems, label }) => (
 
     {menuItems.map((item) => {
       return item.children ? (
-        <ExpandableSideBarItem item={item} />
+        <ExpandableSideBarItem navigate={navigate} item={item} />
       ) : (
         <Stack
           justifyContent={"flex-start"}
@@ -74,6 +76,7 @@ const SideBarItem = ({ menuItems, label }) => (
           spacing={1}
           padding={1}
           sx={{ cursor: "pointer" }}
+          onClick={() => navigate(item.path)}
         >
           <img width={"20px"} src={item.icon} alt={item.name} />
           <Typography fontWeight={600} fontSize={"13px"} color={"#F4F4F4"}>
@@ -100,7 +103,11 @@ const SideBar = () => {
       open={true}
     >
       <Stack spacing={3}>
-        <SideBarItem menuItems={firstSideBarSection} label={"Medical File"} />
+        <SideBarItem
+          navigate={navigate}
+          menuItems={firstSideBarSection}
+          label={"Medical File"}
+        />
         <SideBarItem menuItems={familySideBarSection} label={"My family"} />
         <SideBarItem
           menuItems={myAppointmentSideBar}
