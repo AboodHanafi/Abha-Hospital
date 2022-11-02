@@ -63,11 +63,13 @@ export const firstSideBarSection = [
     id: 4,
     name: "Sick leave",
     icon: sickLeave,
+    path: "sick-leave",
   },
   {
     id: 5,
     name: " Patient prescriptions",
     icon: preScription,
+    path: "prescription-list",
   },
 ];
 
@@ -84,16 +86,19 @@ export const myAppointmentSideBar = [
     id: 0,
     name: "Book appoinment",
     icon: bookAppoinment,
+    path: "next-appointments",
   },
   {
     id: 1,
     name: "Next appointment",
     icon: Calendar,
+    path: "next-appointments",
   },
   {
     id: 2,
     name: "Previous appointment",
     icon: Calendar,
+    path: "previous-appointments",
   },
 ];
 

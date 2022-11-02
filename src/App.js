@@ -13,6 +13,9 @@ import SignIn from "./screens/signin";
 import TestComp from "./screens/test";
 import VitalSigns from "./screens/vitalSigns";
 import InsuranceApprovment from "./screens/InsuranceApprovement";
+import SickLeave from "./screens/sickLeave";
+import PrescriptionList from "./screens/PrescriptionList";
+import Appointment from "./screens/appontment";
 
 function App() {
   const theme = createTheme();
@@ -32,6 +35,10 @@ function App() {
             path={"/Insurance-approvment"}
             element={<InsuranceApprovment />}
           />
+          <Route path={"/sick-leave"} element={<SickLeave />} />
+          <Route path={"/prescription-list"} element={<PrescriptionList />} />
+          <Route path={"/next-appointments"} element={<Appointment />} />
+          <Route path={"/previous-appointments"} element={<Appointment />} />
           <Route path={"/test"} element={<TestComp />} />
         </Routes>
       </Layout>

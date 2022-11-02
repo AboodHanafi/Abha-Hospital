@@ -108,13 +108,22 @@ const SideBar = () => {
           menuItems={firstSideBarSection}
           label={"Medical File"}
         />
-        <SideBarItem menuItems={familySideBarSection} label={"My family"} />
         <SideBarItem
+          navigate={navigate}
+          menuItems={familySideBarSection}
+          label={"My family"}
+        />
+        <SideBarItem
+          navigate={navigate}
           menuItems={myAppointmentSideBar}
           label={"My Appointment"}
         />
 
-        <SideBarItem menuItems={offersSideBar} label={"Offers"} />
+        <SideBarItem
+          navigate={navigate}
+          menuItems={offersSideBar}
+          label={"Offers"}
+        />
       </Stack>
     </MuiDrawer>
   );
