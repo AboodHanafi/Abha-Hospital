@@ -10,6 +10,9 @@ export default function BasicTable({ rows, columns }) {
   const StyledTable = styled(DataGrid)(({ theme }) => ({
     border: "none",
     minHeight: "80vh",
+    color: "#0A0A0A",
+    fontWeight: 500,
+    fontSize: "0.9rem",
     "& .paxton-table--row": {
       border: "none",
       marginTop: "25px",

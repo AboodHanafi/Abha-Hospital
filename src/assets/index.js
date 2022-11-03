@@ -51,6 +51,7 @@ export const firstSideBarSection = [
     id: 2,
     name: "My doctors",
     icon: myDoctors,
+    path: "my-doctors",
   },
   {
     id: 3,
@@ -78,6 +79,7 @@ export const familySideBarSection = [
     id: 0,
     name: "My Family",
     icon: myFamily,
+    path: "my-family",
   },
 ];
 
@@ -112,6 +114,7 @@ export const offersSideBar = [
     id: 1,
     name: "payment",
     icon: payment,
+    path: "invoices",
   },
 ];
 

@@ -16,6 +16,9 @@ import InsuranceApprovment from "./screens/InsuranceApprovement";
 import SickLeave from "./screens/sickLeave";
 import PrescriptionList from "./screens/PrescriptionList";
 import Appointment from "./screens/appontment";
+import Invoices from "./screens/invoices";
+import MyFamily from "./screens/myFamily";
+import MyDoctors from "./screens/myDoctors";
 
 function App() {
   const theme = createTheme();
@@ -31,6 +34,7 @@ function App() {
           <Route path={"/vital-signs"} element={<VitalSigns />} />
           <Route path={"/lab-reports"} element={<LabReports />} />
           <Route path={"/rad-reports"} element={<LabReports />} />
+          <Route path={"/my-doctors"} element={<MyDoctors />} />
           <Route
             path={"/Insurance-approvment"}
             element={<InsuranceApprovment />}
@@ -39,6 +43,8 @@ function App() {
           <Route path={"/prescription-list"} element={<PrescriptionList />} />
           <Route path={"/next-appointments"} element={<Appointment />} />
           <Route path={"/previous-appointments"} element={<Appointment />} />
+          <Route path={"/invoices"} element={<Invoices />} />
+          <Route path={"/my-family"} element={<MyFamily />} />
           <Route path={"/test"} element={<TestComp />} />
         </Routes>
       </Layout>

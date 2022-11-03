@@ -82,7 +82,7 @@ const PrescriptionList = () => {
   useEffect(() => {
     dispatch(
       getPatientDataThunk({
-        url: "rxList",
+        url: "patient/rxList",
       })
     );
   }, []);

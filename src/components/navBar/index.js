@@ -2,10 +2,8 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Stack } from "@mui/system";
 import { AppBar, IconButton, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 const NavBar = () => {
-  const navigate = useNavigate();
   return (
     <AppBar
       sx={{ padding: "5px 10px", paddingLeft: "320px", background: "#FFF" }}

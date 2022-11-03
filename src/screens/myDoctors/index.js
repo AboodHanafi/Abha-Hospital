@@ -5,7 +5,7 @@ import BasicTable from "../../components/table";
 import { getPatientDataThunk } from "../../redux/features/patientData/patintActions";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
-const SickLeave = () => {
+const MyDoctors = () => {
   const dispatch = useDispatch();
   const patient = useSelector((state) => state.patientData.patientData);
   const testReportsColumns = [
@@ -14,48 +14,25 @@ const SickLeave = () => {
       headerName: "#",
     },
     {
-      field: "doctor",
-      flex: 1,
-      align: "center",
-      headerAlign: "center",
-      renderCell: ({ value }) => value.doctorName,
-    },
-    {
-      field: "clinic",
-      flex: 1,
-      align: "center",
-      headerAlign: "center",
-      renderCell: ({ value }) => value.clinicName,
-    },
-    {
-      field: "repDate",
-      headerName: "date",
+      field: "doctorName",
+      headerName: "doctor",
       flex: 1,
       align: "center",
       headerAlign: "center",
     },
-
     {
-      field: "View",
-      headerName: "View",
+      field: "clinicName",
+      headerName: "clinic",
       flex: 1,
       align: "center",
       headerAlign: "center",
-      renderCell: ({ row }) => (
-        <IconButton
-          key={row.leaveId}
-          //   onClick={() => handleClick(row.vitalSignId)}
-        >
-          <VisibilityIcon id={row.leaveId} />
-        </IconButton>
-      ),
     },
   ];
 
   useEffect(() => {
     dispatch(
       getPatientDataThunk({
-        url: "patient/sickLeaves",
+        url: "patient/visitedDrs",
       })
     );
   }, []);
@@ -63,14 +40,14 @@ const SickLeave = () => {
   return (
     <Stack alignItems={"start"} width={"100%"} spacing={4}>
       <Typography fontWeight={600} fontSize={"16px"} color={"#0A0A0A"}>
-        Sick Leaves
+        My Doctors
       </Typography>
       <BasicTable
         columns={testReportsColumns}
-        rows={patient.prescriptionList ? patient.prescriptionList : []}
+        rows={patient.doctors ? patient.doctors : []}
       />
     </Stack>
   );
 };
 
-export default SickLeave;
+export default MyDoctors;

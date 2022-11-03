@@ -72,7 +72,7 @@ const VitalSigns = () => {
   useEffect(() => {
     dispatch(
       getPatientDataThunk({
-        url: "PtVS",
+        url: "patient/PtVS",
       })
     );
   }, []);

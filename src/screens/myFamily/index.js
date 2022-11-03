@@ -1,11 +1,12 @@
-import { IconButton, Stack, Typography } from "@mui/material";
+import { Button, IconButton, Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BasicTable from "../../components/table";
 import { getPatientDataThunk } from "../../redux/features/patientData/patintActions";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 
-const SickLeave = () => {
+import { toast } from "react-hot-toast";
+
+const MyFamily = () => {
   const dispatch = useDispatch();
   const patient = useSelector((state) => state.patientData.patientData);
   const testReportsColumns = [
@@ -14,22 +15,15 @@ const SickLeave = () => {
       headerName: "#",
     },
     {
-      field: "doctor",
+      field: "patientName",
+      headerName: "Name",
       flex: 1,
       align: "center",
       headerAlign: "center",
-      renderCell: ({ value }) => value.doctorName,
     },
     {
-      field: "clinic",
-      flex: 1,
-      align: "center",
-      headerAlign: "center",
-      renderCell: ({ value }) => value.clinicName,
-    },
-    {
-      field: "repDate",
-      headerName: "date",
+      field: "medicFileNumber",
+      headerName: "medical file number",
       flex: 1,
       align: "center",
       headerAlign: "center",
@@ -42,20 +36,27 @@ const SickLeave = () => {
       align: "center",
       headerAlign: "center",
       renderCell: ({ row }) => (
-        <IconButton
-          key={row.leaveId}
-          //   onClick={() => handleClick(row.vitalSignId)}
+        <Button
+          color="primary"
+          key={row.medicFileNumber}
+          onClick={() => handleClick(row.medicFileNumber, row.patientName)}
         >
-          <VisibilityIcon id={row.leaveId} />
-        </IconButton>
+          change to
+        </Button>
       ),
     },
   ];
 
+  const handleClick = (patintCode, patientName) => {
+    localStorage.removeItem("patientCode");
+    localStorage.setItem("patientCode", patintCode);
+    toast.success(`change success to ${patientName}`);
+  };
+
   useEffect(() => {
     dispatch(
       getPatientDataThunk({
-        url: "patient/sickLeaves",
+        url: "patient/familyMembers",
       })
     );
   }, []);
@@ -63,14 +64,14 @@ const SickLeave = () => {
   return (
     <Stack alignItems={"start"} width={"100%"} spacing={4}>
       <Typography fontWeight={600} fontSize={"16px"} color={"#0A0A0A"}>
-        Sick Leaves
+        Family Members
       </Typography>
       <BasicTable
         columns={testReportsColumns}
-        rows={patient.prescriptionList ? patient.prescriptionList : []}
+        rows={patient.familyMembers ? patient.familyMembers : []}
       />
     </Stack>
   );
 };
 
-export default SickLeave;
+export default MyFamily;

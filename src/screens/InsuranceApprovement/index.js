@@ -97,7 +97,7 @@ const InsuranceApprovment = () => {
   useEffect(() => {
     dispatch(
       getPatientDataThunk({
-        url: "srvApvl",
+        url: "patient/srvApvl",
       })
     );
   }, []);

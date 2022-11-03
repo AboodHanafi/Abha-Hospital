@@ -82,7 +82,10 @@ const Appointment = () => {
   useEffect(() => {
     dispatch(
       getPatientDataThunk({
-        url: pathname === "/next-appointments" ? "nextAppt" : "prevAppt",
+        url:
+          pathname === "/next-appointments"
+            ? "patient/nextAppt"
+            : "patient/prevAppt",
       })
     );
   }, [pathname]);
