@@ -1,4 +1,4 @@
-import { Link, Stack, Typography } from "@mui/material";
+import { Button, Divider, Link, Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BasicTable from "../../components/table";
@@ -90,8 +90,18 @@ const PrescriptionDetails = () => {
           Prescription
         </Link>
       </Typography>
-      <Stack spacing={4} padding={3} bgcolor={"#fff"} width={"100%"}>
-        <Stack direction={"row"} justifyContent={"space-between"}>
+      <Stack
+        id="invoice"
+        // spacing={4}
+        padding={3}
+        bgcolor={"#fff"}
+        minWidth={"100%"}
+      >
+        <Stack
+          marginBottom={5}
+          direction={"row"}
+          justifyContent={"space-between"}
+        >
           <Stack spacing={2}>
             <Typography fontWeight={600} fontSize={"16px"} color={"#0A0A0A"}>
               patient name
@@ -127,6 +137,45 @@ const PrescriptionDetails = () => {
           columns={testReportsColumns}
           rows={patient.prescriptionItems ? patient.prescriptionItems : []}
         />
+        <Stack
+          spacing={3}
+          direction={"row"}
+          alignItems={"center"}
+          justifyContent={"space-between"}
+        >
+          <Button
+            sx={{
+              backgroundColor: "#0E4C8F",
+              color: "#fff",
+              width: "150px",
+              height: "50px",
+              ":hover": {
+                backgroundColor: "#0E4C8F",
+              },
+            }}
+          >
+            download
+          </Button>
+          <Stack direction={"row"}>
+            <Stack paddingRight={15} spacing={3}>
+              <Typography color={"#0E4C8F"} fontSize={"13"} fontWeight={600}>
+                TAX
+              </Typography>
+
+              <Typography color={"#0E4C8F"} fontSize={"13"} fontWeight={600}>
+                Total
+              </Typography>
+            </Stack>
+            <Stack paddingRight={7} spacing={3}>
+              <Typography color={"#6CA3DE"} fontSize={"13"} fontWeight={400}>
+                {patient.tax}
+              </Typography>
+              <Typography color={"#6CA3DE"} fontSize={"13"} fontWeight={400}>
+                {patient.total}
+              </Typography>
+            </Stack>
+          </Stack>
+        </Stack>
       </Stack>
     </Stack>
   );

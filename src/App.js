@@ -16,6 +16,8 @@ import MyDoctors from "./screens/myDoctors";
 import LayOut from "./layout";
 import InsuranceApprovmentDetails from "./screens/InsuranceApprovement/details";
 import PrescriptionDetails from "./screens/PrescriptionList/prescriptionDetails";
+import WithAuth from "./components/auth";
+import SignInSide from "./screens/signin/test";
 
 function App() {
   const theme = createTheme();
@@ -27,11 +29,39 @@ function App() {
         <CssBaseline />
         <Routes>
           <Route path={"/"} element={<HomePage />} />
-          <Route path={"/signin"} element={<SignIn />} />
-          <Route path={"/vital-signs"} element={<VitalSigns />} />
-          <Route path={"/lab-reports"} element={<LabReports />} />
-          <Route path={"/rad-reports"} element={<LabReports />} />
-          <Route path={"/my-doctors"} element={<MyDoctors />} />
+          <Route path={"/signin"} element={<SignInSide />} />
+          <Route
+            path={"/vital-signs"}
+            element={
+              <WithAuth>
+                <VitalSigns />
+              </WithAuth>
+            }
+          />
+          <Route
+            path={"/lab-reports"}
+            element={
+              <WithAuth>
+                <LabReports />
+              </WithAuth>
+            }
+          />
+          <Route
+            path={"/rad-reports"}
+            element={
+              <WithAuth>
+                <LabReports />
+              </WithAuth>
+            }
+          />
+          <Route
+            path={"/my-doctors"}
+            element={
+              <WithAuth>
+                <MyDoctors />
+              </WithAuth>
+            }
+          />
           <Route
             path={"/Insurance-approvment"}
             element={<InsuranceApprovment />}

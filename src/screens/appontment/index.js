@@ -71,6 +71,35 @@ const Appointment = () => {
       ),
     },
     {
+      field: "reservationStatus",
+      headerName: "Status",
+      hide: pathname === "/next-appointments" ? true : false,
+      flex: 1,
+      align: "center",
+      headerAlign: "center",
+      renderCell: ({ row }) => (
+        <Typography
+          fontWeight={500}
+          fontSize={14}
+          sx={{
+            color: "#F4F4F4",
+            borderRadius: "10px",
+            minWidth: "65px",
+            background:
+              row.reservationStatus === "غير مؤكد"
+                ? "#F59D18"
+                : row.reservationStatus === "مؤكد"
+                ? "#0CA437"
+                : "#BF1C1C",
+            textAlign: "center",
+            padding: "10px",
+          }}
+        >
+          {row.reservationStatus}
+        </Typography>
+      ),
+    },
+    {
       field: "notes",
       headerName: "notes",
       flex: 1,

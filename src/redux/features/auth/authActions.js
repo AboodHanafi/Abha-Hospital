@@ -12,7 +12,7 @@ export const signInThunk = createAsyncThunk(
       return data;
     } catch (e) {
       return thunkApi.rejectWithValue({
-        msg: "incorrect email or password",
+        msg: "incorrect number or password",
       });
     }
   }

@@ -5,6 +5,7 @@ import BasicTable from "../../components/table";
 import { getPatientDataThunk } from "../../redux/features/patientData/patintActions";
 
 import { toast } from "react-hot-toast";
+import BasicCard from "./familyCard";
 
 const MyFamily = () => {
   const dispatch = useDispatch();
@@ -66,10 +67,21 @@ const MyFamily = () => {
       <Typography fontWeight={600} fontSize={"16px"} color={"#0A0A0A"}>
         Family Members
       </Typography>
-      <BasicTable
-        columns={testReportsColumns}
-        rows={patient.familyMembers ? patient.familyMembers : []}
-      />
+
+      <Stack direction={"row"} gap={4} flexWrap={"wrap"} width={"100%"}>
+        {patient.familyMembers
+          ? patient.familyMembers.map((item) => {
+              return (
+                <BasicCard
+                  key={item.patientIDNumber}
+                  name={item.patientName}
+                  medicalFile={item.medicFileNumber}
+                  idNumber={item.patientIDNumber}
+                />
+              );
+            })
+          : null}
+      </Stack>
     </Stack>
   );
 };

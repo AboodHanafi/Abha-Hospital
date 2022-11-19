@@ -6,7 +6,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { useSelector } from "react-redux";
 import NavBar from "../components/navBar";
 import SideBar from "../components/sideBar";
-import { DrawerHeader } from "../components/sideBar/style";
 
 export default function LayOut({ children }) {
   const [open, setOpen] = React.useState(false);
@@ -26,7 +25,10 @@ export default function LayOut({ children }) {
         </>
       ) : null}
 
-      <Box component="main" sx={{ flexGrow: 1, p: 10, bgcolor: "#f4f4f4" }}>
+      <Box
+        component="main"
+        sx={{ flexGrow: 1, p: 10, minHeight: "100vh", bgcolor: "#f4f4f4" }}
+      >
         {children}
       </Box>
     </Box>
