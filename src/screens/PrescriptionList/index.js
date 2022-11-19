@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import BasicTable from "../../components/table";
 import { getPatientDataThunk } from "../../redux/features/patientData/patintActions";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useNavigate } from "react-router-dom";
 
 const PrescriptionList = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const patient = useSelector((state) => state.patientData.patientData);
   const testReportsColumns = [
     {
@@ -71,13 +73,21 @@ const PrescriptionList = () => {
       renderCell: ({ row }) => (
         <IconButton
           key={row.invoiceNo}
-          //   onClick={() => handleClick(row.vitalSignId)}
+          onClick={() =>
+            handleClick(row.invoiceNo, row.invoiceDate, row.invoiceType)
+          }
         >
           <VisibilityIcon id={row.invoiceNo} />
         </IconButton>
       ),
     },
   ];
+
+  const handleClick = (nom, date, type) => {
+    navigate(`/prescription/${nom}`);
+    localStorage.setItem("date", date);
+    localStorage.setItem("type", type);
+  };
 
   useEffect(() => {
     dispatch(

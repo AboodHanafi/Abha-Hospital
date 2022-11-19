@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import BasicTable from "../../components/table";
 import { getPatientDataThunk } from "../../redux/features/patientData/patintActions";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import axios from "axios";
-import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const InsuranceApprovment = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const patient = useSelector((state) => state.patientData.patientData);
   const testReportsColumns = [
     {
@@ -77,10 +77,7 @@ const InsuranceApprovment = () => {
       align: "center",
       headerAlign: "center",
       renderCell: ({ row }) => (
-        <IconButton
-          key={row.reqId}
-          onClick={() => handleClick(row.vitalSignId)}
-        >
+        <IconButton key={row.reqId} onClick={() => handleClick(row.reqId)}>
           <VisibilityIcon id={row.reqId} />
         </IconButton>
       ),
@@ -88,10 +85,10 @@ const InsuranceApprovment = () => {
   ];
 
   const handleClick = async (id) => {
-    const { data } = await axios.get(
-      `http://aiph.me:8000/api/patient/srvApvlDtl?reqId=90008&pageNo=1&offset=1&rows=100&lang=AR`
-    );
-    console.log(data);
+    // const { data } = await axios.get(
+    //   `http://aiph.me:8000/api/patient/srvApvlDtl?reqId=${id}&pageNo=1&offset=1&rows=100&lang=AR`
+    // );
+    navigate(`/Insurance-approvment/${id}`);
   };
 
   useEffect(() => {

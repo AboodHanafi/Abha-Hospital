@@ -1,12 +1,6 @@
-import {
-  Container,
-  createTheme,
-  CssBaseline,
-  ThemeProvider,
-} from "@mui/material";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
-import Layout from "./layout/layout";
 import HomePage from "./screens/home";
 import LabReports from "./screens/testReports";
 import SignIn from "./screens/signin";
@@ -19,6 +13,9 @@ import Appointment from "./screens/appontment";
 import Invoices from "./screens/invoices";
 import MyFamily from "./screens/myFamily";
 import MyDoctors from "./screens/myDoctors";
+import LayOut from "./layout";
+import InsuranceApprovmentDetails from "./screens/InsuranceApprovement/details";
+import PrescriptionDetails from "./screens/PrescriptionList/prescriptionDetails";
 
 function App() {
   const theme = createTheme();
@@ -26,7 +23,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Toaster />
-      <Layout>
+      <LayOut>
         <CssBaseline />
         <Routes>
           <Route path={"/"} element={<HomePage />} />
@@ -39,15 +36,20 @@ function App() {
             path={"/Insurance-approvment"}
             element={<InsuranceApprovment />}
           />
+          <Route
+            path={"/Insurance-approvment/:id"}
+            element={<InsuranceApprovmentDetails />}
+          />
           <Route path={"/sick-leave"} element={<SickLeave />} />
           <Route path={"/prescription-list"} element={<PrescriptionList />} />
+          <Route path={"/prescription/:id"} element={<PrescriptionDetails />} />
           <Route path={"/next-appointments"} element={<Appointment />} />
           <Route path={"/previous-appointments"} element={<Appointment />} />
           <Route path={"/invoices"} element={<Invoices />} />
           <Route path={"/my-family"} element={<MyFamily />} />
-          <Route path={"/test"} element={<TestComp />} />
+          {/* <Route path={"/test"} element={<TestComp />} /> */}
         </Routes>
-      </Layout>
+      </LayOut>
     </ThemeProvider>
   );
 }

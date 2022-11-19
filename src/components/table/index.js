@@ -1,22 +1,30 @@
-import * as React from "react";
-import TableContainer from "@mui/material/TableContainer";
-
 import Paper from "@mui/material/Paper";
-import { DataGrid } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridToolbarContainer,
+  GridToolbarExport,
+} from "@mui/x-data-grid";
 import { Pagination, Stack, styled } from "@mui/material";
 import { getRows } from "./getRows";
 
-export default function BasicTable({ rows, columns }) {
+function CustomToolbar() {
+  return (
+    <GridToolbarContainer>
+      <GridToolbarExport />
+    </GridToolbarContainer>
+  );
+}
+export default function BasicTable({ rows, columns, invoice }) {
   const StyledTable = styled(DataGrid)(({ theme }) => ({
     border: "none",
-    minHeight: "80vh",
+    minHeight: invoice ? "40vh" : "75vh",
     color: "#0A0A0A",
     fontWeight: 500,
     fontSize: "0.9rem",
     "& .paxton-table--row": {
       border: "none",
-      marginTop: "25px",
-      marginBottom: "25px",
+      marginTop: "15px",
+      marginBottom: "15px",
       backgroundColor: "#fff",
     },
     "& .paxton-table--cell": {
@@ -29,6 +37,7 @@ export default function BasicTable({ rows, columns }) {
       backgroundColor: "#fff",
     },
   }));
+
   return (
     <Stack
       width={"100%"}
@@ -41,9 +50,11 @@ export default function BasicTable({ rows, columns }) {
       <StyledTable
         rows={getRows(rows)}
         component={Pagination}
+        components={{
+          Toolbar: invoice ? CustomToolbar : null,
+        }}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[20]}
+        pageSize={6}
         disableSelectionOnClick
         getRowClassName={() => "paxton-table--row"}
       />

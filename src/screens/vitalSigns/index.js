@@ -55,7 +55,12 @@ const VitalSigns = () => {
           key={row.vitalSignId}
           onClick={() => handleClick(row.vitalSignId)}
         >
-          <VisibilityIcon id={row.vitalSignId} />
+          <VisibilityIcon
+            sx={{
+              fill: "#3CC0B9",
+            }}
+            id={row.vitalSignId}
+          />
         </IconButton>
       ),
     },

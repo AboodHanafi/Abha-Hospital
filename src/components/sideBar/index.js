@@ -1,131 +1,190 @@
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Drawer, DrawerHeader } from "./style";
+import { Collapse, Stack, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import {
   familySideBarSection,
   firstSideBarSection,
+  Images,
   myAppointmentSideBar,
   offersSideBar,
 } from "../../assets";
-import MuiDrawer from "@mui/material/Drawer";
-import { Collapse, Stack, Typography } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useState } from "react";
 
-const ExpandableSideBarItem = ({ item, navigate }) => {
-  const [open, setOpen] = useState(false);
+export const ExpandableSideBarItem = ({ openSide, item, navigate }) => {
+  const [openChildren, setOpenChildren] = useState(false);
   return (
     <>
-      <Stack direction="row" justifyContent="space-between">
-        <Stack
-          justifyContent={"flex-start"}
-          alignItems={"center"}
-          direction={"row"}
-          key={item.id}
-          spacing={1}
-          padding={1}
-          sx={{ cursor: "pointer" }}
-          onClick={() => setOpen(!open)}
+      <ListItem
+        key={item.id}
+        disablePadding
+        sx={{ display: "block" }}
+        onClick={() => setOpenChildren(!openChildren)}
+      >
+        <ListItemButton
+          sx={{
+            minHeight: 48,
+            justifyContent: openSide ? "initial" : "start ",
+            px: 2.5,
+          }}
         >
-          <img width={"20px"} src={item.icon} alt={item.name} />
-          <Typography fontWeight={600} fontSize={"13px"} color={"#F4F4F4"}>
-            {item.name}
-          </Typography>
-        </Stack>
-        {open ? (
-          <KeyboardArrowDownIcon sx={{ fill: "#FFF" }} />
-        ) : (
-          <KeyboardArrowUpIcon sx={{ fill: "#FFF" }} />
-        )}
-      </Stack>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        {item.children.map((item) => (
-          <Typography
-            paddingX={5}
-            paddingY={0.5}
-            fontWeight={300}
-            key={item.id}
-            fontSize={"13px"}
-            color={"#F4F4F4"}
+          <ListItemIcon
             sx={{
-              cursor: "pointer",
+              minWidth: 0,
+              mr: openSide ? 3 : "auto",
+              justifyContent: "center",
             }}
-            onClick={() => navigate(item.path)}
           >
-            {item.name}
-          </Typography>
-        ))}
-      </Collapse>
+            <img src={item.icon} alt="icon" />
+          </ListItemIcon>
+
+          <ListItemText
+            primary={item.name}
+            sx={{ opacity: openSide ? 1 : 0, color: "#fff" }}
+          />
+          <ListItemIcon sx={{ opacity: openSide ? 1 : 0 }}>
+            {openChildren ? (
+              <KeyboardArrowDownIcon sx={{ fill: "#FFF" }} />
+            ) : (
+              <KeyboardArrowUpIcon sx={{ fill: "#FFF" }} />
+            )}
+          </ListItemIcon>
+        </ListItemButton>
+      </ListItem>
+      {openSide ? (
+        <Collapse in={openChildren} timeout="auto" unmountOnExit>
+          <List>
+            {item.children.map((item) => (
+              <ListItem key={item.id} disablePadding sx={{ display: "block" }}>
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: openSide ? "initial" : "center",
+                    px: 10,
+                  }}
+                  onClick={() => navigate(item.path)}
+                >
+                  <ListItemText
+                    primary={item.name}
+                    sx={{ opacity: openSide ? 1 : 0, color: "#fff" }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Collapse>
+      ) : null}
     </>
   );
 };
-const SideBarItem = ({ menuItems, label, navigate }) => (
+export const SideBarItem = ({ openSide, menuItems, label, navigate }) => (
   <Stack>
-    <Typography fontWeight={300} fontSize={"13px"} color={"#fff"}>
+    <Typography
+      sx={{
+        opacity: openSide ? 1 : 0,
+      }}
+      fontWeight={300}
+      fontSize={"13px"}
+      color={"#fff"}
+      paddingLeft={5}
+    >
       {label}
     </Typography>
 
     {menuItems.map((item) => {
       return item.children ? (
-        <ExpandableSideBarItem navigate={navigate} item={item} />
-      ) : (
-        <Stack
-          justifyContent={"flex-start"}
-          alignItems={"center"}
-          direction={"row"}
+        <ExpandableSideBarItem
           key={item.id}
-          spacing={1}
-          padding={1}
-          sx={{ cursor: "pointer" }}
-          onClick={() => navigate(item.path)}
-        >
-          <img width={"20px"} src={item.icon} alt={item.name} />
-          <Typography fontWeight={600} fontSize={"13px"} color={"#F4F4F4"}>
-            {item.name}
-          </Typography>
-        </Stack>
+          openSide={openSide}
+          navigate={navigate}
+          item={item}
+        />
+      ) : (
+        <ListItem key={item.id} disablePadding sx={{ display: "block" }}>
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              justifyContent: openSide ? "initial" : "center",
+              px: 2.5,
+            }}
+            onClick={() => navigate(item.path)}
+          >
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: openSide ? 3 : "auto",
+                justifyContent: "center",
+              }}
+            >
+              <img src={item.icon} alt="icon" />
+            </ListItemIcon>
+            <ListItemText
+              primary={item.name}
+              sx={{ opacity: openSide ? 1 : 0, color: "#fff" }}
+            />
+          </ListItemButton>
+        </ListItem>
       );
     })}
   </Stack>
 );
 
-const SideBar = () => {
+const SideBar = ({ open }) => {
   const navigate = useNavigate();
   return (
-    <MuiDrawer
-      sx={{
-        "& .MuiDrawer-paper": {
-          backgroundColor: "#0E4C8F",
-          width: "300px",
-          padding: "100px 20px 0",
-        },
-      }}
-      variant="permanent"
-      open={true}
-    >
-      <Stack spacing={3}>
+    <Drawer variant="permanent" open={open}>
+      <Divider />
+      <Stack
+        sx={{
+          display: open ? "visible" : "none",
+        }}
+        alignItems={"center"}
+        margin={"10px 0"}
+      >
+        <img width={"92px"} height={"80px"} src={Images.logo} alt="logo" />
+      </Stack>
+
+      <List>
         <SideBarItem
           navigate={navigate}
           menuItems={firstSideBarSection}
           label={"Medical File"}
+          openSide={open}
         />
+      </List>
+      <List>
         <SideBarItem
           navigate={navigate}
           menuItems={familySideBarSection}
-          label={"My family"}
+          label={"My Family"}
+          openSide={open}
         />
+      </List>
+      <List>
         <SideBarItem
           navigate={navigate}
           menuItems={myAppointmentSideBar}
           label={"My Appointment"}
+          openSide={open}
         />
-
+      </List>
+      <List>
         <SideBarItem
           navigate={navigate}
           menuItems={offersSideBar}
           label={"Offers"}
+          openSide={open}
         />
-      </Stack>
-    </MuiDrawer>
+      </List>
+    </Drawer>
   );
 };
 

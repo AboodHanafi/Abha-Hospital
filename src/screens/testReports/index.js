@@ -49,7 +49,12 @@ const LabReports = () => {
           key={row.fileName}
           onClick={() => transformTopdf(row.fileName)}
         >
-          <DownloadIcon id={row.fileName} />
+          <DownloadIcon
+            sx={{
+              fill: "#78B3E9",
+            }}
+            id={row.fileName}
+          />
         </IconButton>
       ),
     },

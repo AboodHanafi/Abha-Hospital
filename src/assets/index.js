@@ -10,17 +10,15 @@ import Calendar from "./Calendar.png";
 import order from "./order.png";
 import payment from "./payment.png";
 
-import smallLogo from "./logo.png";
-import MainLogo from "./MainLogo.png";
+import logo from "./logo.png";
 
 import Hypertension from "./Hypertension.png";
 import blood from "./blood.png";
 import length from "./length.png";
 import weight from "./weight.png";
 
-export const logo = {
-  smallLogo,
-  MainLogo,
+export const Images = {
+  logo,
 };
 
 export const listHome = [

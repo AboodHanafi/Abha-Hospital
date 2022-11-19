@@ -2,7 +2,7 @@ import { Button, Link, Stack, Typography } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logo } from "../../assets";
+import { Images } from "../../assets";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const HomePage = () => {
           justifyContent="center"
           spacing={2}
         >
-          <img src={logo.smallLogo} alt="logo" />
+          <img src={Images.logo} alt="logo" />
           <Typography fontWeight={500} color="#004C8C">
             الصفحة الرئيسية
           </Typography>
@@ -44,7 +44,7 @@ const HomePage = () => {
   return (
     <Stack alignItems={"center"}>
       <Stack spacing={2}>
-        <img src={logo.MainLogo} alt="logo" />
+        <img src={Images.logo} alt="logo" />
       </Stack>
       {/* <Stack>
         <Typography fontSize={"32px"} fontWeight={400}>

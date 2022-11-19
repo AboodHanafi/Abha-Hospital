@@ -22,9 +22,9 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { signInThunk } from "../../redux/features/auth/authActions";
 import { toast } from "react-hot-toast";
-import { logo } from "../../assets";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Images } from "../../assets";
 
 function Copyright(props) {
   return (
@@ -85,7 +85,7 @@ const SignIn = () => {
           {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
            <LockOutlinedIcon />
          </Avatar> */}
-          <img src={logo.smallLogo} alt="logo" />
+          <img src={Images.logo} alt="logo" />
           <Typography component="h1" variant="h5">
             تسجيل الدخول
           </Typography>
