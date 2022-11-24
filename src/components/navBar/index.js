@@ -7,6 +7,8 @@ import { useState } from "react";
 import BasicMenu from "../profileMenu";
 
 const NavBar = ({ open, handleDrawerOpen }) => {
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
+
   const [anchorEl, setAnchorEl] = useState(null);
   const openProfile = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -37,33 +39,39 @@ const NavBar = ({ open, handleDrawerOpen }) => {
             }}
           />
         </IconButton>
-        <Stack
-          direction={"row"}
-          alignItems={"center"}
-          sx={{
-            cursor: "pointer",
-          }}
-        >
-          <Avatar
-            id="basic-button"
-            aria-controls={openProfile ? "basic-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={openProfile ? "true" : undefined}
-            onClick={handleClick}
-            sx={{ bgcolor: deepOrange[500] }}
-          >
-            N
-          </Avatar>
-          <KeyboardArrowDownIcon
+        <Stack spacing={3} direction={"row"} alignItems={"center"}>
+          {/* <Typography fontWeight={400} fontSize={"13px"} color={"#0A0A0A"}>
+            {userData.first_name}&nbsp;
+            {userData.last_name}
+          </Typography> */}
+          <Stack
+            direction={"row"}
+            alignItems={"center"}
             sx={{
-              fill: "#0A0A0A",
+              cursor: "pointer",
             }}
-          />
-          <BasicMenu
-            open={openProfile}
-            handleClose={handleClose}
-            anchorEl={anchorEl}
-          />
+          >
+            <Avatar
+              id="basic-button"
+              aria-controls={openProfile ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={openProfile ? "true" : undefined}
+              onClick={handleClick}
+              sx={{ bgcolor: deepOrange[500] }}
+            >
+              {userData.first_name.charAt(0)}
+            </Avatar>
+            <KeyboardArrowDownIcon
+              sx={{
+                fill: "#0A0A0A",
+              }}
+            />
+            <BasicMenu
+              open={openProfile}
+              handleClose={handleClose}
+              anchorEl={anchorEl}
+            />
+          </Stack>
         </Stack>
       </Toolbar>
     </AppBar>

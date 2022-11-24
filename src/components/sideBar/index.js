@@ -94,7 +94,7 @@ export const SideBarItem = ({ openSide, menuItems, label, navigate }) => (
       fontWeight={300}
       fontSize={"13px"}
       color={"#fff"}
-      paddingLeft={5}
+      padding={"15px 20px 0"}
     >
       {label}
     </Typography>
@@ -152,38 +152,33 @@ const SideBar = ({ open }) => {
         <img width={"92px"} height={"80px"} src={Images.logo} alt="logo" />
       </Stack>
 
-      <List>
-        <SideBarItem
-          navigate={navigate}
-          menuItems={firstSideBarSection}
-          label={"Medical File"}
-          openSide={open}
-        />
-      </List>
-      <List>
-        <SideBarItem
-          navigate={navigate}
-          menuItems={familySideBarSection}
-          label={"My Family"}
-          openSide={open}
-        />
-      </List>
-      <List>
-        <SideBarItem
-          navigate={navigate}
-          menuItems={myAppointmentSideBar}
-          label={"My Appointment"}
-          openSide={open}
-        />
-      </List>
-      <List>
-        <SideBarItem
-          navigate={navigate}
-          menuItems={offersSideBar}
-          label={"Offers"}
-          openSide={open}
-        />
-      </List>
+      <SideBarItem
+        navigate={navigate}
+        menuItems={firstSideBarSection}
+        label={"Medical File"}
+        openSide={open}
+      />
+
+      <SideBarItem
+        navigate={navigate}
+        menuItems={familySideBarSection}
+        label={"My Family"}
+        openSide={open}
+      />
+
+      <SideBarItem
+        navigate={navigate}
+        menuItems={myAppointmentSideBar}
+        label={"My Appointment"}
+        openSide={open}
+      />
+
+      <SideBarItem
+        navigate={navigate}
+        menuItems={offersSideBar}
+        label={"Offers"}
+        openSide={open}
+      />
     </Drawer>
   );
 };

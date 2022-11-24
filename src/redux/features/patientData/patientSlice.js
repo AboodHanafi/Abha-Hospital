@@ -3,7 +3,7 @@ import { getPatientDataThunk } from "./patintActions";
 
 const initialState = {
   patientData: {},
-  pationtName: "",
+  isLoading: true,
 };
 
 export const vitalSignsSlice = createSlice({
@@ -11,14 +11,16 @@ export const vitalSignsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getPatientDataThunk.pending, (state) => {});
+    builder.addCase(getPatientDataThunk.pending, (state) => {
+      state.isLoading = true;
+    });
     builder.addCase(getPatientDataThunk.fulfilled, (state, action) => {
       state.patientData = action.payload;
-      if (action.payload.patientName) {
-        state.patientName = action.payload.patientName;
-      }
+      state.isLoading = false;
     });
-    builder.addCase(getPatientDataThunk.rejected, (state, action) => {});
+    builder.addCase(getPatientDataThunk.rejected, (state, action) => {
+      state.isLoading = false;
+    });
   },
 });
 

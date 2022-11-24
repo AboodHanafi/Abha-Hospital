@@ -10,6 +10,7 @@ const PrescriptionList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const patient = useSelector((state) => state.patientData.patientData);
+
   const testReportsColumns = [
     {
       field: "id",

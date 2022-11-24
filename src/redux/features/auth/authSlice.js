@@ -15,8 +15,8 @@ export const authSlice = createSlice({
   reducers: {
     logOut: (state) => {
       state.isAuthed = false;
-      localStorage.removeItem("userToken");
-      localStorage.removeItem(Authed_Storage_Key);
+      localStorage.clear();
+      sessionStorage.clear();
     },
   },
   extraReducers: (builder) => {
@@ -24,10 +24,9 @@ export const authSlice = createSlice({
     builder.addCase(signInThunk.fulfilled, (state, action) => {
       state.isAuthed = true;
       state.patientData = action.payload?.items;
-      const token = action.payload?.items.token.split("|");
-      state.userToken = token[1];
+      sessionStorage.setItem("userData", JSON.stringify(action.payload?.items));
       localStorage.setItem("patientCode", state.patientData.p_code);
-      localStorage.setItem("userToken", state.userToken);
+      localStorage.setItem("userToken", action.payload?.items.token);
       localStorage.setItem(Authed_Storage_Key, "1");
     });
     builder.addCase(signInThunk.rejected, (state, action) => {});

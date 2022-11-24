@@ -1,7 +1,8 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import LockIcon from "@mui/icons-material/Lock";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
@@ -25,21 +26,8 @@ import { toast } from "react-hot-toast";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Images } from "../../assets";
+import { CustomizedTextField } from "../../globalStyle";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      Abha Hospital 2022
-      {"."}
-    </Typography>
-  );
-}
 const SignIn = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const navigate = useNavigate();
@@ -73,49 +61,100 @@ const SignIn = () => {
 
   if (!isAuthed) {
     return (
-      <Container component="main" maxWidth="xs">
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
+      <Container
+        sx={{
+          backgroundColor: "#1B1F23",
+          height: "100%",
+        }}
+        maxWidth="xs"
+      >
+        <Stack
+          alignItems={"center"}
+          spacing={3}
+          component="form"
+          onSubmit={handleSubmit}
         >
-          {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-           <LockOutlinedIcon />
-         </Avatar> */}
-          <img src={Images.logo} alt="logo" />
-          <Typography component="h1" variant="h5">
-            تسجيل الدخول
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
+          <Stack>
+            <img
+              width={"117px"}
+              height={"100px"}
+              src={Images.logo}
+              alt="logo"
+            />
+          </Stack>
+          <Stack>
+            <Stack id="Username">
+              <FormLabel>رقم الهاتف</FormLabel>
+              <CustomizedTextField
+                placeholder={"Username"}
+                variant="outlined"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <AlternateEmailIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Stack>
+            <Stack id="password">
+              <FormLabel>كلمة المرور</FormLabel>
+              <OutlinedInput
+                id="outlined-adornment-Password"
+                type={showPassword ? "text" : "password"}
+                placeholder={"Password"}
+                variant="outlined"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <LockIcon />
+                  </InputAdornment>
+                }
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </Stack>
+          </Stack>
+
+          {/* <Stack>
             <FormLabel>رقم الهاتف</FormLabel>
-            <TextField
+            <CustomizedTextField
               required
               fullWidth
               id="mobile"
               name="mobile"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AlternateEmailIcon />
+                  </InputAdornment>
+                ),
+              }}
               autoComplete="mobile"
-              autoFocus
               placeholder="أدخل رقم الهاتف هنا"
             />
-
+          </Stack>
+          <Stack>
             <FormLabel>كلمة المرور</FormLabel>
+
             <OutlinedInput
-              id="password"
-              name="password"
-              autoComplete="current-password"
-              placeholder="enter your password"
-              required
-              fullWidth
+              id="outlined-adornment-Password"
               type={showPassword ? "text" : "password"}
+              placeholder={"Password"}
               variant="outlined"
+              startAdornment={
+                <InputAdornment position="start">
+                  <LockIcon />
+                </InputAdornment>
+              }
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -128,33 +167,32 @@ const SignIn = () => {
                 </InputAdornment>
               }
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="تذكرني"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              تسجيل الدخول
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  نسيت كلمة المرور؟
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"لا تملك حساب ؟ إنشاء حساب جديد"}
-                </Link>
-              </Grid>
+          </Stack>
+          {/* <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="تذكرني"
+          /> */}
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            تسجيل الدخول
+          </Button>
+          {/* <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                نسيت كلمة المرور؟
+              </Link>
             </Grid>
-          </Box>
-        </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+            <Grid item>
+              <Link href="#" variant="body2">
+                {"لا تملك حساب ؟ إنشاء حساب جديد"}
+              </Link>
+            </Grid>
+          </Grid> */}
+        </Stack>
       </Container>
     );
   }

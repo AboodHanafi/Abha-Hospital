@@ -1,19 +1,23 @@
 import Paper from "@mui/material/Paper";
 import { DataGrid } from "@mui/x-data-grid";
-import { Stack, styled } from "@mui/material";
+import { Box, Skeleton, Stack, styled } from "@mui/material";
 import { getRows } from "./getRows";
 import * as React from "react";
-import { useDemoData } from "@mui/x-data-grid-generator";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function BasicTable({ rows, columns, invoice }) {
-  const [pageSize, setPageSize] = React.useState(6);
+  const [pageSize, setPageSize] = useState(5);
+  const [page, setPage] = useState(0);
+  const isLoading = useSelector((state) => state.patientData.isLoading);
 
   const StyledTable = styled(DataGrid)(({ theme }) => ({
     border: "none",
-    minHeight: invoice ? "40vh" : "75vh",
+    minHeight: invoice ? "40vh" : "70vh",
     color: "#0A0A0A",
     fontWeight: 500,
     fontSize: "0.9rem",
+    // width: "auto",
     "& .paxton-table--row": {
       border: "none",
       marginTop: "15px",
@@ -25,32 +29,52 @@ export default function BasicTable({ rows, columns, invoice }) {
     },
     "& .MuiDataGrid-columnHeaders": {
       backgroundColor: "#fff",
+      width: "200vh",
+      minwidth: "100vw",
     },
     "& .MuiDataGrid-footerContainer": {
       display: invoice ? "none" : "",
       backgroundColor: "#fff",
     },
   }));
-
-  return (
-    <Stack
-      width={"100%"}
+  const LoadingSkeleton = () => (
+    <Box
       sx={{
-        backgroundColor: "#f4f4f4",
-        boxShadow: "none",
+        height: "max-content",
+        width: "100%",
       }}
-      component={Paper}
     >
-      <StyledTable
-        rows={getRows(rows)}
-        columns={columns}
-        pageSize={pageSize}
-        onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        rowsPerPageOptions={[6, 12, 18, 100]}
-        pagination
-        disableSelectionOnClick
-        getRowClassName={() => "paxton-table--row"}
-      />
-    </Stack>
+      {[...Array(10)].map((_, index) => (
+        <Skeleton key={index} variant="rectangular" sx={{ my: 4, mx: 1 }} />
+      ))}
+    </Box>
   );
+
+  if (!isLoading) {
+    return (
+      <Stack
+        width={"100%"}
+        sx={{
+          backgroundColor: "#f4f4f4",
+          boxShadow: "none",
+        }}
+        component={Paper}
+      >
+        <StyledTable
+          rows={getRows(rows)}
+          columns={columns}
+          page={page}
+          onPageChange={(newPage) => setPage(newPage)}
+          pageSize={pageSize}
+          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+          rowsPerPageOptions={[5, 10, 20, 100]}
+          pagination
+          disableSelectionOnClick
+          getRowClassName={() => "paxton-table--row"}
+        />
+      </Stack>
+    );
+  } else {
+    return <LoadingSkeleton />;
+  }
 }

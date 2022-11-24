@@ -47,7 +47,7 @@ const LabReports = () => {
       renderCell: ({ row }) => (
         <IconButton
           key={row.fileName}
-          onClick={() => transformTopdf(row.fileName)}
+          onClick={() => transformTopdf(row.fileName, row.serviceType)}
         >
           <DownloadIcon
             sx={{
@@ -59,13 +59,16 @@ const LabReports = () => {
       ),
     },
   ];
-  const transformTopdf = async (fileName) => {
+  const transformTopdf = async (fileName, serviceType) => {
     const { data } = await axios.get(
-      `http://aiph.me:8000/api/patient/pdfFile?patientCode=0/372081&serviceType=lab-test&fileName=${fileName}`
+      `http://aiph.me:8000/api/patient/pdfFile?patientCode=${localStorage.getItem(
+        "patientCode"
+      )}&serviceType=${serviceType}&fileName=${fileName}`
     );
+
     if (data.pdfFile) {
       const base64 = `data:application/pdf;base64,${data.pdfFile}`;
-      triggerBase64Download(base64, pathname);
+      triggerBase64Download(base64, fileName);
     } else {
       toast.error("your report not ready yet");
     }

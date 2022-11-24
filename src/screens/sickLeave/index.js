@@ -67,7 +67,7 @@ const SickLeave = () => {
       </Typography>
       <BasicTable
         columns={testReportsColumns}
-        rows={patient.prescriptionList ? patient.prescriptionList : []}
+        rows={patient.leaves ? patient.leaves : []}
       />
     </Stack>
   );

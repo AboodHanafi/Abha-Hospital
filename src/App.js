@@ -64,19 +64,76 @@ function App() {
           />
           <Route
             path={"/Insurance-approvment"}
-            element={<InsuranceApprovment />}
+            element={
+              <WithAuth>
+                <InsuranceApprovment />
+              </WithAuth>
+            }
           />
           <Route
             path={"/Insurance-approvment/:id"}
-            element={<InsuranceApprovmentDetails />}
+            element={
+              <WithAuth>
+                <InsuranceApprovmentDetails />
+              </WithAuth>
+            }
           />
-          <Route path={"/sick-leave"} element={<SickLeave />} />
-          <Route path={"/prescription-list"} element={<PrescriptionList />} />
-          <Route path={"/prescription/:id"} element={<PrescriptionDetails />} />
-          <Route path={"/next-appointments"} element={<Appointment />} />
-          <Route path={"/previous-appointments"} element={<Appointment />} />
-          <Route path={"/invoices"} element={<Invoices />} />
-          <Route path={"/my-family"} element={<MyFamily />} />
+          <Route
+            path={"/sick-leave"}
+            element={
+              <WithAuth>
+                <SickLeave />
+              </WithAuth>
+            }
+          />
+          <Route
+            path={"/prescription-list"}
+            element={
+              <WithAuth>
+                <PrescriptionList />{" "}
+              </WithAuth>
+            }
+          />
+          <Route
+            path={"/prescription/:id"}
+            element={
+              <WithAuth>
+                <PrescriptionDetails />{" "}
+              </WithAuth>
+            }
+          />
+          <Route
+            path={"/next-appointments"}
+            element={
+              <WithAuth>
+                <Appointment />{" "}
+              </WithAuth>
+            }
+          />
+          <Route
+            path={"/previous-appointments"}
+            element={
+              <WithAuth>
+                <Appointment />{" "}
+              </WithAuth>
+            }
+          />
+          <Route
+            path={"/invoices"}
+            element={
+              <WithAuth>
+                <Invoices />{" "}
+              </WithAuth>
+            }
+          />
+          <Route
+            path={"/my-family"}
+            element={
+              <WithAuth>
+                <MyFamily />{" "}
+              </WithAuth>
+            }
+          />
           {/* <Route path={"/test"} element={<TestComp />} /> */}
         </Routes>
       </LayOut>

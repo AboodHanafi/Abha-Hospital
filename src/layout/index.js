@@ -27,7 +27,14 @@ export default function LayOut({ children }) {
 
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 10, minHeight: "100vh", bgcolor: "#f4f4f4" }}
+        sx={{
+          flexGrow: 1,
+          p: isAuthed ? "50px 80px 50px " : 0,
+          mt: isAuthed ? "60px" : 0,
+          height: "100vh",
+          overflow: "auto",
+          bgcolor: "#f4f4f4",
+        }}
       >
         {children}
       </Box>

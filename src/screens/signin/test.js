@@ -1,15 +1,15 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
+
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import styled from "@emotion/styled";
+import { Button, TextField } from "@mui/material";
+
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { signInThunk } from "../../redux/features/auth/authActions";
 import { toast } from "react-hot-toast";
@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Images } from "../../assets";
+import { CustomButton, CustomizedTextField } from "../../globalStyle";
 
 function Copyright(props) {
   return (
@@ -117,19 +118,21 @@ export default function SignInSide() {
             onSubmit={handleSubmit}
             sx={{ mt: 1 }}
           >
-            <TextField
+            <CustomizedTextField
               margin="normal"
               required
               fullWidth
+              placeholder="أدخل رقم الهاتف"
               id="mobile"
               name="mobile"
               autoComplete="mobile"
               autoFocus
             />
-            <TextField
+            <CustomizedTextField
               margin="normal"
               required
               fullWidth
+              placeholder="أدخل كلمة المرور"
               name="password"
               type={showPassword ? "text" : "password"}
               id="password"
@@ -147,17 +150,28 @@ export default function SignInSide() {
               }
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              sx={{
+                color: "#fff",
+              }}
+              control={
+                <Checkbox
+                  value="remember"
+                  sx={{
+                    color: "#fff",
+                  }}
+                />
+              }
               label="Remember me"
             />
-            <Button
-              type="submit"
-              fullWidth
+            <CustomButton
+              boxshadow={"0px 4px 12px rgba(0, 0, 0, 0.05)"}
+              border={"1px solid #e9e7e7"}
+              textcolor="#1D1D1B"
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              type="submit"
             >
               Sign In
-            </Button>
+            </CustomButton>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -170,7 +184,6 @@ export default function SignInSide() {
                 </Link>
               </Grid>
             </Grid>
-            <Copyright sx={{ mt: 5 }} />
           </Box>
         </Box>
       </Grid>

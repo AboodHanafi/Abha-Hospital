@@ -12,6 +12,7 @@ const VitalSigns = () => {
   const patient = useSelector((state) => state.patientData.patientData);
   const [open, setOpen] = useState(false);
   const [vitalDetails, setvitalDetails] = useState([]);
+
   const VitalCloumns = [
     {
       field: "id",

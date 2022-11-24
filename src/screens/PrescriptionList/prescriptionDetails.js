@@ -9,6 +9,7 @@ const PrescriptionDetails = () => {
   const dispatch = useDispatch();
   const patient = useSelector((state) => state.patientData.patientData);
   const { id } = useParams();
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
 
   const testReportsColumns = [
     {
@@ -30,6 +31,7 @@ const PrescriptionDetails = () => {
       flex: 1,
       align: "center",
       headerAlign: "center",
+      minWidth: 90,
     },
     {
       field: "durationOfUse",
@@ -37,18 +39,21 @@ const PrescriptionDetails = () => {
       flex: 1,
       align: "center",
       headerAlign: "center",
+      minWidth: 90,
     },
     {
       field: "frequency",
       flex: 1,
       align: "center",
       headerAlign: "center",
+      minWidth: 90,
     },
     {
       field: "route",
       flex: 1,
       align: "center",
       headerAlign: "center",
+      minWidth: 90,
     },
     {
       field: "qty",
@@ -56,18 +61,21 @@ const PrescriptionDetails = () => {
       flex: 1,
       align: "center",
       headerAlign: "center",
+      minWidth: 90,
     },
     {
       field: "remarks",
       flex: 1,
       align: "center",
       headerAlign: "center",
+      minWidth: 90,
     },
     {
       field: "price",
       flex: 1,
       align: "center",
       headerAlign: "center",
+      minWidth: 90,
     },
   ];
 
@@ -76,9 +84,7 @@ const PrescriptionDetails = () => {
       getPatientDataThunk({
         url: `patient/rxItems?invoiceNo=${id}&invoiceDate=${localStorage.getItem(
           "date"
-        )}&invoiceType=${localStorage.getItem(
-          "type"
-        )}&pageNo=1&offset=1&rows=100`,
+        )}&invoiceType=${localStorage.getItem("type")}`,
       })
     );
   }, []);
@@ -90,13 +96,7 @@ const PrescriptionDetails = () => {
           Prescription
         </Link>
       </Typography>
-      <Stack
-        id="invoice"
-        // spacing={4}
-        padding={3}
-        bgcolor={"#fff"}
-        minWidth={"100%"}
-      >
+      <Stack id="invoice" padding={3} bgcolor={"#fff"} width="100%">
         <Stack
           marginBottom={5}
           direction={"row"}
@@ -106,19 +106,20 @@ const PrescriptionDetails = () => {
             <Typography fontWeight={600} fontSize={"16px"} color={"#0A0A0A"}>
               patient name
               <Typography fontWeight={400} fontSize={"16px"} color={"#0A0A0A"}>
-                jihad mahfouz
+                {userData.first_name}&nbsp;
+                {userData.last_name}
               </Typography>
             </Typography>
             <Typography fontWeight={600} fontSize={"16px"} color={"#0A0A0A"}>
               ID Number
               <Typography fontWeight={400} fontSize={"16px"} color={"#0A0A0A"}>
-                123456789
+                {userData.identity_number}
               </Typography>
             </Typography>
             <Typography fontWeight={600} fontSize={"16px"} color={"#0A0A0A"}>
               Email Address
               <Typography fontWeight={400} fontSize={"16px"} color={"#0A0A0A"}>
-                Jeha.mahfouz1990@gmail.com
+                {userData.email}
               </Typography>
             </Typography>
           </Stack>
@@ -126,7 +127,7 @@ const PrescriptionDetails = () => {
             <Typography fontWeight={600} fontSize={"16px"} color={"#0A0A0A"}>
               Invoice Number
               <Typography fontWeight={400} fontSize={"16px"} color={"#0A0A0A"}>
-                555555555
+                {id}
               </Typography>
             </Typography>
           </Stack>
